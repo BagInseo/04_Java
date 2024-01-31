@@ -274,18 +274,15 @@ public class ConditionEx {
 		
 		double total= (kor+eng+math+society+science)/5;
 		
-		if(total<60) {
+		if(total<60.0) {
 			result="FAIL";
-			System.out.printf("%s[점수 : %f (평균 미달)]",result,total);
+			System.out.printf("%s[점수 : %.1f (평균 미달)]",result,total);
 		}
 		else {
 			result="PASS";
-			System.out.printf("%s[점수 : %f]",result, total);
-			
+			System.out.printf("%s[점수 : %.1f]",result, total);		
 		}
 		
-		
-		
-	}
+	}//method5()
 	
 }//ConditionEx
