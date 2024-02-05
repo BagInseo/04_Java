@@ -11,13 +11,13 @@ public class OperatorRun {
 		OperatorEx ex = new OperatorEx(); //가져온 클래스를 이용해 객체 생성
 //		ex.test();
 		
-//		ex.method1();
+		ex.method1();
 		
 //		ex.method2();
 
 //		ex.method3();
 		
-		ex.method4();
+//		ex.method4();
 	}
 	
 }

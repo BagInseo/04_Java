@@ -161,6 +161,9 @@ public class ConditionEx {
 		
 		
 		String result=null;
+		//The local variable result may not have been initialized
+		//초기화 하지 않았을 때 생기는 오류
+		
 		String score = "F";
 		
 		if(middleTest<=100 && finalTest<=100 && subject<=100) {
@@ -173,6 +176,7 @@ public class ConditionEx {
 //				else score="D";
 //				
 				//switch문 매개변수로는 정수, 문자열, 문자만 가능
+				//때문에 int로 강제 형변환
 				switch((int)(total/10)) {
 				case 10: result="A"; break;
 				case 9: result="A"; break;
