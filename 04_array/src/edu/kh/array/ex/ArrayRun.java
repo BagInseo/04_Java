@@ -16,8 +16,8 @@ public class ArrayRun {
 //		ex1.method3();
 //		ex1.method4();
 		
-//		ex2.method1();
-//		ex2.method2();
+		ex2.method1();
+		ex2.method2();
 		ex2.method3();
 	}
 }

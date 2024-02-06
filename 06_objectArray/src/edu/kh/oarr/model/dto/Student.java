@@ -3,6 +3,7 @@ package edu.kh.oarr.model.dto;
 
 //DTO : Data Tranfer Object (갑 전달용 객체)
 public class Student {
+	
 	private String 	studentNumber; //학번
 	private String 	name;		  //이름
 	private char 	gender;		  //성별
