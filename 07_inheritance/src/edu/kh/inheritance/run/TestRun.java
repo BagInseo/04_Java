@@ -1,5 +1,6 @@
 package edu.kh.inheritance.run;
 
+import edu.kh.inheritance.model.dto.Child1;
 import edu.kh.inheritance.model.dto.Parent;
 
 public class TestRun {
