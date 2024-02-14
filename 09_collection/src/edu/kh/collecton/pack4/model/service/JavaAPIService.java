@@ -145,12 +145,24 @@ public class JavaAPIService {
 	
 	
 	/**
-	 * String의 불변성(변하지 않는 성질 == 상수)
-	 * -> 주소값을 이용해서 만든 해시코드(식별 번호)
-	 * -> 같은 객체에 저장된 값이 변했다면 주소는 일정해야 된다
-	 * ->identityHashCode도 일정 해야된다. 
+	 * String의 불변성(immutable, 변하지 않는 성질 == 상수)
+	 * - 문자열이 수정되면 새로운 String 객체가 생성됨
+	 * 
+	 * String을 ""리터럴을 이용해 생성/수정하면
+	 * String Pool에 String 객체가 계속 새롭게 생성된다. 
+	 * 
+	 * ->수정으로 인해 참조 당하지 않는 String 객체가 바로 
+	 * 삭제되지 않기 때문에 메모리를 계속 차지하는 문제 발생
+	 * ->JVM의 GC가 관리를 해주지만
+	 * 지워질 때 까지 메모리가 낭비되는 문제가 발생하여
+	 * String의 수정을 권하지 않은(효율 낭비)
 	 */
 	public void method3() {
+		
+		//System.identityHashCode(str)
+		 //-> 주소값을 이용해서 만든 해시코드(식별 번호)
+		 //-> 같은 객체에 저장된 값이 변했다면 주소는 일정해야 된다
+		 //->identityHashCode도 일정 해야된다. 
 		String str="hello";
 		System.out.println(str);
 		System.out.println(System.identityHashCode(str));
@@ -168,6 +180,97 @@ public class JavaAPIService {
 		
 	}//method3()
 	
+	
+	/**
+	 * String 리터럴("")로 생성된 객체 활용
+	 * - 동일한 리터럴을 이용해 String 객체를 생성한 경우
+	 *   추가적으로 객체를 생성하지 않고
+	 *   기존에 존재하는 String 객체의 주소를 반환(재활용)
+	 */
+	public void method4() {
+		String temp1="Hello";
+		String temp2="Hello";
+		
+		System.out.println(System.identityHashCode(temp1)); //0x400생성
+		System.out.println(System.identityHashCode(temp2)); //0x400 주소만 반환 받음
+															//기존 객체 재활용 (얕은 복사)
+		
+		//같음을 비교
+		
+		//객체의 필드 값 비교
+		System.out.println("저장된 값 비교"+temp1.equals(temp2)); //저장된 값 비교
+		
+		//변수에 저장된 값(주소)비교
+		System.out.println("주소를 비교" + (temp1==temp2)); //저장된 값 비교
+		
+	}//method4()
+	
+	
+	/**
+	 * 사용자(개발자)가 관리하는 String 객체 생성
+	 *  - "" 리터럴로 생성된 String -> JVM관리 (String Pool)
+	 *  - new 연산자로 생성된 String -> 사용자 관리(Heap)
+	 */
+	public void method5() {
+		String temp1="abcd"; //리터럴 생성
+		String temp2=new String("abcd"); //new 연산자로 생성
+		String temp3=new String("abcd");
+		
+		System.out.println("temp1 " + System.identityHashCode(temp1));
+		System.out.println("temp2 " + System.identityHashCode(temp2));
+		System.out.println("temp2 "
+				+ "" + System.identityHashCode(temp3));
+		
+		// 셋 다 주소가 다름 =="abcd"를 재활용 하지 않음
+		// -> 값은 같지만 전부 다른 객체
+	}//method5()
+	
+	
+	/**
+	 * StringBuilder/StringBuffer 클래스
+	 * - String의 불변성 문제를 해결한 클래스
+	 * ->가변성(mutable)
+	 * 
+	 * -기본 16글자 저장할 크기로 생성
+	 *  저장되는 문자열의 길이에 따라 크기가 증가/감소
+	 *  ->마음대로 문자열 수정, 삭제 가능!
+	 *  ->수정, 삭제를 해도 추가적인 객체 생성이 없어 효율 좋음  
+	 *  
+	 *  
+	 *  -StringBulider : Thread Safe 미제공(비동기)
+	 *  -StringBuffer  : Thread Safe    제공(동기)
+	 */
+	public void method6() {
+		//StringBuilder 객체 생성
+		StringBuilder sb = new StringBuilder();
+		
+		//StringBuilder 객체에 문자열을 쌓아 나가는 방식으로 사용
+		// -> 뒤에 추가, 앞에 추가
+		sb.append("오늘 점심은 ");//"오늘 점심은"
+		System.out.println(System.identityHashCode(sb));
+		sb.append("무엇을 먹을까요?");//"오늘 점심음" + "무엇을 먹을까요?'
+		System.out.println(System.identityHashCode(sb));
+		
+		sb.insert(0, "2원14일 ");
+		System.out.println(System.identityHashCode(sb));
+		
+		//identityHashCode 값이 일정
+		//== 참조하는 객체가 변하지 않음
+		// 객체 내에 값만 수정되고 있다==가변성
+		 
+		System.out.println(sb);
+
+		
+		//StringBuilder -> String
+		String temp =sb.toString(); //객체에 저장된 필드를 문자열로 반환
+		
+		//String[] 문자열.spilt("구분자")
+		//=문자열을 "구분자"를 기준으로 쪼개어 String[]로 반환
+		String[] arr= temp.split(" ");
+		for(String str: arr) {
+			System.out.println(str);
+		}
+	}//method6()
 	
 }
 
