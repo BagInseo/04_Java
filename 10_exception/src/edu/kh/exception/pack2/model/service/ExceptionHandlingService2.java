@@ -20,7 +20,7 @@ public class ExceptionHandlingService2 {
 	
 	
 	public void method1() {
-		System.out.println("1. 겅상 수행 / 2. 강제 예외 발생 :");
+		System.out.println("1. 정상 수행 / 2. 강제 예외 발생 :");
 		
 		int input=sc.nextInt();
 		
@@ -66,7 +66,7 @@ public class ExceptionHandlingService2 {
 			//scan이 참조하는 Scanner 객체가 존재 할 때
 			
 			if(scan != null) {
-				scan.close();
+				
 			}
 		}
 		}
