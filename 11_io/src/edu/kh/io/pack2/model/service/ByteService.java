@@ -19,6 +19,11 @@ public class ByteService {
 	 * Byte 기반 스트림
 	 * - 1byte 단위로 데이터를 입/출력하는 스트림
 	 * - 최상위 인터페이스 : InputStream, OutputStream
+	 * 
+	 * 
+	 * 
+	 * 
+	 * 
 	 * - 문지열, 이미지, 영상, 오디오, pdf 등 
 	 *   모든 것을 입/출력 할 수 있음
 	 *   (단, 통로가 좁다보니 속도가 조금 느림)
